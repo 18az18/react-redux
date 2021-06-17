@@ -236,6 +236,7 @@ app.get("/items", (req, res) => {
 });
 
 app.get("/items/:category", (req, res) => {
+  console.log("category is: ");
   const items = [
     {
       category: "Drink",

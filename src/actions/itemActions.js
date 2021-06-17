@@ -65,11 +65,7 @@ export const setItemsInCategory = (items) => {
 export const fetchItemsInCategory = (category) => {
   return (dispatch) => {
     axios
-      .get("http://localhost:5000/items", {
-        params: {
-          category,
-        },
-      })
+      .get("http://localhost:5000/items/" + category, {})
       .then((res) => {
         console.log("fetching api items in category: ", res.data);
         dispatch(setItemsInCategory(res.data));
@@ -80,12 +76,19 @@ export const fetchItemsInCategory = (category) => {
   };
 };
 
-export const setItemQuantity = (itemId, quantity, subtotal) => {
+export const setItemQuantity = (itemId, quantity, subtotal, url) => {
   console.log("setting item: " + itemId + " to have quantity of: " + quantity);
   return {
     type: actions.SET_ITEM_QUANTITY,
     itemId,
     quantity,
     subtotal,
+    url,
   };
 };
+
+export const clearShoppingCart = () => {
+    return {
+        type: actions.PATCH_CLEAR_SHOPPING_CART
+    }
+}

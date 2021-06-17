@@ -7,6 +7,7 @@ import { setItemQuantity } from '../actions/itemActions'
 const Item = ( { name, price, url } ) => {
     const dispatch = useDispatch();
     console.log('current item is: ', name);
+    console.log('current url is: ', url);
     const cartItem1 = useSelector((state) => state.items.cart);
     const [itemCount, setItemCount] = useState(0);
     console.log('item count is, ', itemCount);
@@ -41,22 +42,22 @@ const Item = ( { name, price, url } ) => {
                 onChange={(e) => {
                     console.log(e.target.value === '');
                     if (e.target.value === '') {
-                        dispatch(setItemQuantity(name, 0, 0))
+                        dispatch(setItemQuantity(name, 0, 0, url))
                         setItemCount(0);
                     } else {
-                        dispatch(setItemQuantity(name, e.target.value, price * e.target.value));
+                        dispatch(setItemQuantity(name, e.target.value, price * e.target.value, url));
                         setItemCount(e.target.value);
                     }
                 }}
             />
             <div className="flex flex-v">
             <button type='button' onClick={() => {
-                    dispatch(setItemQuantity(name, itemCount + 1, price * (itemCount + 1)));
+                    dispatch(setItemQuantity(name, itemCount + 1, price * (itemCount + 1), url));
                     setItemCount(itemCount + 1);
                 }}>+</button>
             <button type='button' onClick={() => {
                     if (itemCount > 0) {
-                        dispatch(setItemQuantity(name, itemCount - 1, price * (itemCount - 1)));
+                        dispatch(setItemQuantity(name, itemCount - 1, price * (itemCount - 1), url));
                         setItemCount(itemCount - 1);
                     }
                 }}>-</button>

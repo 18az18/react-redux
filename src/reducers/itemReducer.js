@@ -8,11 +8,13 @@ const initialState = {
       name: "Burger",
       quantity: 1,
       subtotal: 1,
+      url:  "./burger.png",
     },
     {
       name: "cake",
       quantity: 2,
       subtotal: 4,
+      url: "./cake.png",
     },
   ],
 };
@@ -47,6 +49,7 @@ const itemReducer = (state = initialState, action) => {
               name: action.itemId,
               quantity: action.quantity,
               subtotal: action.subtotal,
+              url: action.url
             },
           ];
         }
@@ -59,6 +62,11 @@ const itemReducer = (state = initialState, action) => {
             ? state.cart.filter((item) => item.name !== action.itemId)
             : addedQuantityCart,
       };
+      case actions.PATCH_CLEAR_SHOPPING_CART:
+          return {
+              ...state,
+              cart: []
+          }
     default:
       return state;
   }
